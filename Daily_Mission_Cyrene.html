@@ -54,82 +54,21 @@
         <th>Temps Restant</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>Ben's Polka Dot Blueprint - Pleak Feathers (24h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Polka_Dot_Blueprint">
-          <span class="time" id="time-Polka_Dot_Blueprint">24:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Island Biome Imperium Ranger Hunt! (24h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Island_Biome_Imperium_Ranger_Hunt">
-          <span class="time" id="time-Island_Biome_Imperium_Ranger_Hunt">24:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Isle de Zel Imperium Hunt! (24h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Isle_de_Zel_Imperium_Hunt">
-          <span class="time" id="time-Isle_de_Zel_Imperium_Hunt">24:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Manuthale Swamp Imperium Ranger Hunt! (24h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Manuthale_Swamp_Imperium_Ranger_Hunt">
-          <span class="time" id="time-Manuthale_Swamp_Imperium_Ranger_Hunt">24:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Paneleon Hunter Jameson’s Mission (21h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Paneleon_Hunter_Jameson">
-          <span class="time" id="time-Paneleon_Hunter_Jameson">21:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Robot Base Z.R.Q. Imperium Hunt! (24h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Robot_Base_ZRQ_Imperium_Hunt">
-          <span class="time" id="time-Robot_Base_ZRQ_Imperium_Hunt">24:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Test of Strength (21h)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-Test_of_Strength">
-          <span class="time" id="time-Test_of_Strength">21:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Timer 8h</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-8h">
-          <span class="time" id="time-8h">08:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Timer 36h</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-36h">
-          <span class="time" id="time-36h">36:00:00</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Timer 24h(2)</td>
-        <td class="timer-cell">
-          <input type="checkbox" id="chk-24h_2">
-          <span class="time" id="time-24h_2">36:00:00</span>
-        </td>
-      </tr>
+    <tbody id="timers-body">
     </tbody>
   </table>
 
   <script>
-/* ========= CONFIGURATION DES TIMERS ========= */
+
+/* ========= JSON INTÉGRÉ ========= */
+
+const timersConfig = [
+  { "id": "Polka_Dot_Blueprint", "name": "Ben's Polka Dot Blueprint - Pleak Feathers (24h)", "hours": 24 },
+  { "id": "Island_Biome_Imperium_Ranger_Hunt", "name": "Island Biome Imperium Ranger Hunt! (24h)", "hours": 24 },
+  { "id": "36h",     "name": "Timer 36h",       "hours": 36 },
+  { "id": "24h-bis", "name": "Timer 24h (bis)", "hours": 24 }
+];
+
 
     const timers = [
       { id: "Polka_Dot_Blueprint", durationMs: 24 * 60 * 60 * 1000 },
@@ -144,7 +83,10 @@
       { id: "24h_2", durationMs: 24 * 60 * 60 * 1000 },
     ];
 
-    const intervals = {};
+/* ========= VARIABLES ========= */
+
+const intervals = {};
+const tableBody = document.getElementById("timers-body");
 
 /* ========= FORMATAGE ========= */
 
@@ -156,15 +98,66 @@ function formatTime(ms) {
   return `${h}:${m}:${s}`;
 }
 
+/* ========= CRÉATION DU TABLEAU ========= */
+
+function createTimerRow(timer) {
+
+  const durationMs = timer.hours * 60 * 60 * 1000;
+
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${timer.name}</td>
+    <td class="timer-cell">
+      <input type="checkbox" id="chk-${timer.id}">
+      <span class="time" id="time-${timer.id}">${formatTime(durationMs)}</span>
+    </td>
+  `;
+
+  tableBody.appendChild(tr);
+
+  const checkbox = document.getElementById(`chk-${timer.id}`);
+  const timeEl = document.getElementById(`time-${timer.id}`);
+
+  /* ====== INITIALISATION ====== */
+
+  const endTime = Number(localStorage.getItem(`endTime_${timer.id}`));
+  const running = localStorage.getItem(`running_${timer.id}`) === "true";
+
+  if (running && endTime && endTime > Date.now()) {
+
+    checkbox.checked = true;
+    runInterval(timer, durationMs, endTime);
+
+  } else {
+
+    timeEl.textContent = formatTime(durationMs);
+    checkbox.checked = false;
+
+  }
+
+  /* ====== EVENT ====== */
+
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      startTimer(timer, durationMs);
+    } else {
+      stopTimer(timer);
+    }
+  });
+
+}
+
 /* ========= DÉMARRAGE ========= */
 
-function startTimer(timer) {
-  const endTime = Date.now() + timer.durationMs;
+function startTimer(timer, durationMs) {
+
+  const endTime = Date.now() + durationMs;
 
   localStorage.setItem(`endTime_${timer.id}`, endTime);
   localStorage.setItem(`running_${timer.id}`, "true");
 
-  runInterval(timer, endTime);
+  runInterval(timer, durationMs, endTime);
 }
 
 /* ========= ARRÊT ========= */
@@ -176,7 +169,7 @@ function stopTimer(timer) {
 
 /* ========= INTERVAL ========= */
 
-function runInterval(timer, endTime) {
+function runInterval(timer, durationMs, endTime) {
 
   const timeEl = document.getElementById(`time-${timer.id}`);
   const checkbox = document.getElementById(`chk-${timer.id}`);
@@ -193,43 +186,15 @@ function runInterval(timer, endTime) {
       checkbox.checked = false;
       localStorage.setItem(`running_${timer.id}`, "false");
       localStorage.removeItem(`endTime_${timer.id}`);
+      timeEl.textContent = formatTime(durationMs);
     }
 
   }, 1000);
 }
 
-/* ========= INITIALISATION ========= */
+/* ========= INITIALISATION GLOBALE ========= */
 
-timers.forEach(timer => {
-
-  const timeEl = document.getElementById(`time-${timer.id}`);
-  const checkbox = document.getElementById(`chk-${timer.id}`);
-
-  const endTime = Number(localStorage.getItem(`endTime_${timer.id}`));
-  const running = localStorage.getItem(`running_${timer.id}`) === "true";
-
-  if (running && endTime && endTime > Date.now()) {
-
-    checkbox.checked = true;
-    timeEl.textContent = formatTime(endTime - Date.now());
-    runInterval(timer, endTime);
-
-  } else {
-
-    timeEl.textContent = formatTime(timer.durationMs);
-    checkbox.checked = false;
-
-  }
-
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      startTimer(timer);
-    } else {
-      stopTimer(timer);
-    }
-  });
-
-});
+timersConfig.forEach(timer => createTimerRow(timer));
 
 </script>
 
