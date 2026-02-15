@@ -2,188 +2,160 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Mission Daily => A.R.I.S.</title>
-
+<title>Daily Mission = A.R.I.S.</title>
 <style>
 body {
   font-family: Arial, sans-serif;
-  margin: 40px;
 }
-
 table {
   border-collapse: collapse;
-  width: 550px;
+  width: 100%;
+  max-width: 700px;
 }
-
 th, td {
   border: 1px solid #ccc;
-  padding: 12px;
+  padding: 8px;
+  text-align: center;
 }
-
-th {
-  background: #f2f2f2;
-  text-align: left;
-}
-
-.timer-cell {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 1.2rem;
-}
-
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+button {
+  padding: 4px 8px;
   cursor: pointer;
-}
-
-.time {
-  font-family: monospace;
-  font-size: 1.3rem;
 }
 </style>
 </head>
-
 <body>
 
-<h2>-= Mission Daily => A.R.I.S. =-</h2>
+<h2>-= Daily Missions = A.R.I.S. =-</h2>
 
 <table>
-<thead>
-<tr>
-<th>Nom de Mission</th>
-<th>Temps Restant</th>
-</tr>
-</thead>
-<tbody id="timers-body">
-</tbody>
+  <thead>
+    <tr>
+      <th>Mission</th>
+      <th>Actif / Compteur</th>
+      <th>WayPoint</th>
+    </tr>
+  </thead>
+  <tbody id="timersTable"></tbody>
 </table>
 
 <script>
+const STORAGE_KEY = "timers_state_v1";
+let configTimers = [];
+let state = {};
 
-/* ========= JSON INTÉGRÉ ========= */
-
-const timersConfig = [
-  { "id": "24h",     "name": "Timer 24h",       "hours": 24 },
-  { "id": "8h",      "name": "Timer 8h",        "hours": 8 },
-  { "id": "36h",     "name": "Timer 36h",       "hours": 36 },
-  { "id": "24h-bis", "name": "Timer 24h (bis)", "hours": 24 }
-];
-
-/* ========= VARIABLES ========= */
-
-const intervals = {};
-const tableBody = document.getElementById("timers-body");
-
-/* ========= FORMATAGE ========= */
-
-function formatTime(ms) {
-  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-  const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-  const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-  const s = String(totalSeconds % 60).padStart(2, "0");
-  return `${h}:${m}:${s}`;
-}
-
-/* ========= CRÉATION DU TABLEAU ========= */
-
-function createTimerRow(timer) {
-
-  const durationMs = timer.hours * 60 * 60 * 1000;
-
-  const tr = document.createElement("tr");
-
-  tr.innerHTML = `
-    <td>${timer.name}</td>
-    <td class="timer-cell">
-      <input type="checkbox" id="chk-${timer.id}">
-      <span class="time" id="time-${timer.id}">${formatTime(durationMs)}</span>
-    </td>
-  `;
-
-  tableBody.appendChild(tr);
-
-  const checkbox = document.getElementById(`chk-${timer.id}`);
-  const timeEl = document.getElementById(`time-${timer.id}`);
-
-  /* ====== INITIALISATION ====== */
-
-  const endTime = Number(localStorage.getItem(`endTime_${timer.id}`));
-  const running = localStorage.getItem(`running_${timer.id}`) === "true";
-
-  if (running && endTime && endTime > Date.now()) {
-
-    checkbox.checked = true;
-    runInterval(timer, durationMs, endTime);
-
-  } else {
-
-    timeEl.textContent = formatTime(durationMs);
-    checkbox.checked = false;
-
-  }
-
-  /* ====== EVENT ====== */
-
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      startTimer(timer, durationMs);
-    } else {
-      stopTimer(timer);
-    }
+fetch("timers_aris.json")
+  .then(res => res.json())
+  .then(data => {
+    configTimers = data;
+    loadState();
+    renderTimers();
+    setInterval(updateTimers, 1000);
   });
 
+function loadState() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  state = saved ? JSON.parse(saved) : {};
 }
 
-/* ========= DÉMARRAGE ========= */
-
-function startTimer(timer, durationMs) {
-
-  const endTime = Date.now() + durationMs;
-
-  localStorage.setItem(`endTime_${timer.id}`, endTime);
-  localStorage.setItem(`running_${timer.id}`, "true");
-
-  runInterval(timer, durationMs, endTime);
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-/* ========= ARRÊT ========= */
+function renderTimers() {
+  const tbody = document.getElementById("timersTable");
+  tbody.innerHTML = "";
 
-function stopTimer(timer) {
-  clearInterval(intervals[timer.id]);
-  localStorage.setItem(`running_${timer.id}`, "false");
-}
-
-/* ========= INTERVAL ========= */
-
-function runInterval(timer, durationMs, endTime) {
-
-  const timeEl = document.getElementById(`time-${timer.id}`);
-  const checkbox = document.getElementById(`chk-${timer.id}`);
-
-  clearInterval(intervals[timer.id]);
-
-  intervals[timer.id] = setInterval(() => {
-
-    const remaining = endTime - Date.now();
-    timeEl.textContent = formatTime(remaining);
-
-    if (remaining <= 0) {
-      clearInterval(intervals[timer.id]);
-      checkbox.checked = false;
-      localStorage.setItem(`running_${timer.id}`, "false");
-      localStorage.removeItem(`endTime_${timer.id}`);
-      timeEl.textContent = formatTime(durationMs);
+  configTimers.forEach(timer => {
+    if (!state[timer.id]) {
+      state[timer.id] = {
+        endTime: null
+      };
     }
 
-  }, 1000);
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = timer.name;
+
+    const controlCell = document.createElement("td");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+
+    const counterSpan = document.createElement("span");
+    counterSpan.style.marginLeft = "8px";
+
+    if (state[timer.id].endTime) {
+      checkbox.checked = true;
+    }
+
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        const end = Date.now() + timer.durationHours * 3600 * 1000;
+        state[timer.id].endTime = end;
+      } else {
+        state[timer.id].endTime = null;
+      }
+      saveState();
+      updateTimers();
+    });
+
+    controlCell.appendChild(checkbox);
+    controlCell.appendChild(counterSpan);
+
+    const copyCell = document.createElement("td");
+    const copyButton = document.createElement("button");
+    copyButton.textContent = "Copier";
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard.writeText(timer.coords);
+      copyButton.textContent = "Copié !";
+      setTimeout(() => copyButton.textContent = "Copier", 1000);
+    });
+    copyCell.appendChild(copyButton);
+
+    row.appendChild(nameCell);
+    row.appendChild(controlCell);
+    row.appendChild(copyCell);
+
+    tbody.appendChild(row);
+
+    timer._elements = {
+      checkbox,
+      counterSpan
+    };
+  });
+
+  saveState();
 }
 
-/* ========= INITIALISATION GLOBALE ========= */
+function updateTimers() {
+  configTimers.forEach(timer => {
+    const s = state[timer.id];
+    const elements = timer._elements;
 
-timersConfig.forEach(timer => createTimerRow(timer));
+    if (!s.endTime) {
+      elements.counterSpan.textContent = "";
+      elements.checkbox.checked = false;
+      return;
+    }
 
+    const remaining = s.endTime - Date.now();
+
+    if (remaining <= 0) {
+      s.endTime = null;
+      elements.counterSpan.textContent = "Terminé";
+      elements.checkbox.checked = false;
+      saveState();
+      return;
+    }
+
+    const hours = Math.floor(remaining / (1000 * 60 * 60));
+    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+    elements.counterSpan.textContent =
+      `${hours}h ${minutes}m ${seconds}s`;
+  });
+}
 </script>
 
 </body>
