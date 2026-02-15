@@ -49,6 +49,26 @@ button {
   padding: 4px 8px;
   cursor: pointer;
 }
+
+.active-row {
+  background-color: #e8f5e9;
+}
+
+.section-header {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: left;
+}
+
+.badge-active {
+  background-color: #4caf50;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
 </style>
 </head>
 <body>
@@ -94,18 +114,58 @@ function renderTimers() {
   tbody.innerHTML = "";
 
   configTimers.forEach(timer => {
-
     if (!state[timer.id]) {
       state[timer.id] = { endTime: null };
     }
+  });
+
+  const sortedTimers = [...configTimers].sort((a, b) => {
+    const aActive = !!state[a.id].endTime;
+    const bActive = !!state[b.id].endTime;
+
+    if (aActive !== bActive) {
+      return bActive - aActive;
+    }
+
+    return a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
+  });
+
+  let activeSectionAdded = false;
+  let inactiveSectionAdded = false;
+
+  sortedTimers.forEach(timer => {
+
+    const isActive = !!state[timer.id].endTime;
+
+    // Ajouter entête section si nécessaire
+    if (isActive && !activeSectionAdded) {
+      addSectionHeader("Timers actifs");
+      activeSectionAdded = true;
+    }
+
+    if (!isActive && !inactiveSectionAdded) {
+      addSectionHeader("Timers inactifs");
+      inactiveSectionAdded = true;
+    }
 
     const row = document.createElement("tr");
+
+    if (isActive) {
+      row.classList.add("active-row");
+    }
 
     // Colonne 1
     const nameCell = document.createElement("td");
     nameCell.textContent = timer.name;
 
-    // Colonne 2 (alignée gauche)
+    if (isActive) {
+      const badge = document.createElement("span");
+      badge.textContent = "Actif";
+      badge.className = "badge-active";
+      nameCell.appendChild(badge);
+    }
+
+    // Colonne 2
     const controlCell = document.createElement("td");
     controlCell.className = "control-cell";
 
@@ -118,7 +178,7 @@ function renderTimers() {
     const counterSpan = document.createElement("span");
     counterSpan.className = "counter";
 
-    checkbox.checked = !!state[timer.id].endTime;
+    checkbox.checked = isActive;
 
     checkbox.addEventListener("change", () => {
       if (checkbox.checked) {
@@ -128,14 +188,14 @@ function renderTimers() {
         state[timer.id].endTime = null;
       }
       saveState();
-      updateTimers();
+      renderTimers();
     });
 
     wrapper.appendChild(checkbox);
     wrapper.appendChild(counterSpan);
     controlCell.appendChild(wrapper);
 
-    // Colonne 3 (copie compatible Google Sites)
+    // Colonne 3
     const copyCell = document.createElement("td");
 
     const copyContainer = document.createElement("div");
@@ -171,6 +231,17 @@ function renderTimers() {
 
   saveState();
   updateTimers();
+}
+
+function addSectionHeader(text) {
+  const tbody = document.getElementById("timersTable");
+  const row = document.createElement("tr");
+  const cell = document.createElement("td");
+  cell.colSpan = 3;
+  cell.textContent = text;
+  cell.className = "section-header";
+  row.appendChild(cell);
+  tbody.appendChild(row);
 }
 
 function updateTimers() {
