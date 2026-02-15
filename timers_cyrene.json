@@ -1,15 +1,45 @@
 [
   {
+    "id": "cyr17",
+    "name": "A.R.C. Faction Mission - Stage 1 - Daily - Scout Bot XT (21h)",
+    "durationHours": 21,
+    "coords": "A venir..."
+  },
+  {
+    "id": "cyr16",
+    "name": "A.R.C. Faction Mission - Stage 1 - Daily - Swamp Lurker (21h)",
+    "durationHours": 21,
+    "coords": "A venir..."
+  },
+  {
+    "id": "cyr10",
+    "name": "Arms Merchant - Ozpyn Trader Laser and BLP (14j)",
+    "durationHours": 336,
+    "coords": "A venir..."
+  },
+  {
+    "id": "cyr11",
+    "name": "Atlas Haven Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "A venir..."
+  },
+  {
     "id": "cyr8",
     "name": "Auraforger and You: Collecting Sweat For 'Axe' (21h)",
     "durationHours": 21,
-    "coords": "50.6292, 3.0573"
+    "coords": "A venir..."
   },
   {
     "id": "cyr1",
     "name": "Ben's Polka Dot Blueprint - Pleak Feathers (24h)",
     "durationHours": 24,
     "coords": "/wp [Arkadia, 219, 108, 123, Waypoint]"
+  },
+  {
+    "id": "cyr13",
+    "name": "Cage To Pills (7j)",
+    "durationHours": 168,
+    "coords": "A venir...A venir..."
   },
   {
     "id": "cyr2",
@@ -30,10 +60,28 @@
     "coords": "/wp [Planet Cyrene, 131901, 75632, 129, Manuthale Swamp Imperium Ranger Hunt!]"
   },
   {
+    "id": "cyr15",
+    "name": "Meet The Zyn'Kimbro... (21h)",
+    "durationHours": 21,
+    "coords": "A venir..."
+  },
+  {
     "id": "cyr5",
     "name": "Paneleon Hunter Jameson’s Mission (21h)",
     "durationHours": 21,
-    "coords": "50.6292, 3.0573"
+    "coords": "A venir..."
+  },
+  {
+    "id": "cyr9",
+    "name": "Pet Master: Low Level Taming Daily (21h)",
+    "durationHours": 21,
+    "coords": "A venir..."
+  },
+  {
+    "id": "cyr14",
+    "name": "Pet Master: Low Level Turn In Daily (21h)",
+    "durationHours": 21,
+    "coords": "A venir..."
   },
   {
     "id": "cyr6",
@@ -45,18 +93,18 @@
     "id": "cyr7",
     "name": "Test of Strength (21h)",
     "durationHours": 21,
-    "coords": "50.6292, 3.0573"
+    "coords": "A venir..."
   },
   {
-    "id": "cyr9",
-    "name": "cyr9",
+    "id": "cyr12",
+    "name": "Turrelion Desert Imperium Ranger Hunt! (24h)",
     "durationHours": 24,
-    "coords": "50.6292, 3.0573"
+    "coords": "A venir..."
   },
   {
-    "id": "cyr10",
-    "name": "cyr10",
+    "id": "cyr18",
+    "name": "cyr18",
     "durationHours": 24,
-    "coords": "50.6292, 3.0573"
+    "coords": "A venir..."
   }
 ]
