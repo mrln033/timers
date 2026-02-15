@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cyr_tg_1",
+    "name": "Cages to Pills (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 138264, 77450, 102, Zyn'Tao]"
+  },
+  {
+    "id": "cyr_tg_2",
+    "name": "Pet Master: Low Level Taming Daily (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138270, 77450, 102, Zyn'Dar]"
+  },
+  {
+    "id": "cyr_tg_3",
+    "name": "Pet Master: Low Level Turn in Daily (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138270, 77450, 102, Zyn'Dar]"
+  },
+  {
+    "id": "cyr_tg_4",
+    "name": "Pet Master: Mid Level Taming Daily (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138270, 77450, 102, Zyn'Dar]"
+  },
+  {
+    "id": "cyr_tg_5",
+    "name": "Pet Master: Mid Level Turn in Daily (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138270, 77450, 102, Zyn'Dar]"
+  }
+]
