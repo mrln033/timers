@@ -114,6 +114,7 @@ function renderTimers() {
         const end = Date.now() + timer.durationHours * 3600 * 1000;
         state[timer.id].endTime = end;
       } else {
+        const end = Date.now() + timer.durationHours * 3600 * 1000;
         state[timer.id].endTime = null;
       }
       saveState();
@@ -181,4 +182,5 @@ function updateTimers() {
 
 </body>
 </html>
+
 
