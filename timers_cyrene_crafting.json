@@ -1,0 +1,80 @@
+[
+  {
+    "id": "cyr_c_1",
+    "name": "Craft a C.B.R. 107! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138462, 77300, 101, Mac - Trade Supplier]"
+  },
+  {
+    "id": "cyr_c_2",
+    "name": "Craft an Embossed Cyrene Shirt! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138462, 77300, 101, Mac - Trade Supplier]"
+  },
+  {
+    "id": "cyr_c_3",
+    "name": "Craft a Cube Empowered Lube! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138462, 77300, 101, Mac - Trade Supplier]"
+  },
+  {
+    "id": "cyr_c_4",
+    "name": "Craft a Cyrene Acid Armor Plate! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138462, 77300, 101, Mac - Trade Supplier]"
+  },
+  {
+    "id": "cyr_c_5",
+    "name": "Craft some Cube Enhanced Metal! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138462, 77300, 101, Mac - Trade Supplier]"
+  },
+  {
+    "id": "cyr_c_6",
+    "name": "Craft an Ozpyn Filter! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77081, 112, Ron Sophiscus - Item Fabricator]"
+  },
+  {
+    "id": "cyr_c_7",
+    "name": "Craft an Enkidd Dire S1 (L)! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77081, 112, Ron Sophiscus - Item Fabricator]"
+  },
+  {
+    "id": "cyr_c_8",
+    "name": "Craft a Patterned Shirt Series 1 (L,C)! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77081, 112, Ron Sophiscus - Item Fabricator]"
+  },
+  {
+    "id": "cyr_c_9",
+    "name": "Craft a Ozpyn Cold Protector (L)! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77081, 112, Ron Sophiscus - Item Fabricator]"
+  },
+  {
+    "id": "cyr_c_10",
+    "name": "Craft an Imperium Key Cube! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77081, 112, Ron Sophiscus - Item Fabricator]"
+  },
+  {
+    "id": "cyr_c_11",
+    "name": "Daily Texture Crafting Challenge - Kayde Barns (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 138031, 78731, 166, Kayde Barnes]"
+  },
+  {
+    "id": "cyr_c_12",
+    "name": "Pet Crafting: Tamer Horns Blueprint (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 138265, 77450, 104, Zyn'Tao]"
+  },
+  {
+    "id": "cyr_c_13",
+    "name": "It's Sconce Time! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 138032, 78679, 159, Ro'ge'her]"
+  },
+]
