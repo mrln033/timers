@@ -3,7 +3,7 @@
     "id": "t1",
     "name": "Timer 24h",
     "durationHours": 24,
-    "coords": ": "/wp [Arkadia, 219, 108, 123, Waypoint]"
+    "coords": "/wp [Arkadia, 219, 108, 123, Waypoint]"
   },
   {
     "id": "t2",
@@ -24,3 +24,4 @@
     "coords": "50.6292, 3.0573"
   }
 ]
+
