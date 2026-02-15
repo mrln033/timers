@@ -7,16 +7,44 @@
 body {
   font-family: Arial, sans-serif;
 }
+
 table {
   border-collapse: collapse;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
 }
+
 th, td {
   border: 1px solid #ccc;
   padding: 8px;
-  text-align: center;
 }
+
+td.control-cell {
+  text-align: left;
+}
+
+.control-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter {
+  font-weight: bold;
+}
+
+.copy-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.copy-input {
+  width: 100%;
+  padding: 4px;
+  font-size: 13px;
+}
+
 button {
   padding: 4px 8px;
   cursor: pointer;
@@ -77,14 +105,18 @@ function renderTimers() {
     const nameCell = document.createElement("td");
     nameCell.textContent = timer.name;
 
-    // Colonne 2
+    // Colonne 2 (alignée gauche)
     const controlCell = document.createElement("td");
+    controlCell.className = "control-cell";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "control-wrapper";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
     const counterSpan = document.createElement("span");
-    counterSpan.style.marginLeft = "8px";
+    counterSpan.className = "counter";
 
     checkbox.checked = !!state[timer.id].endTime;
 
@@ -99,28 +131,34 @@ function renderTimers() {
       updateTimers();
     });
 
-    controlCell.appendChild(checkbox);
-    controlCell.appendChild(counterSpan);
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(counterSpan);
+    controlCell.appendChild(wrapper);
 
-    // Colonne 3
+    // Colonne 3 (copie compatible Google Sites)
     const copyCell = document.createElement("td");
+
+    const copyContainer = document.createElement("div");
+    copyContainer.className = "copy-container";
+
     const copyButton = document.createElement("button");
     copyButton.textContent = "Copier";
 
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "text";
+    hiddenInput.value = timer.coords;
+    hiddenInput.className = "copy-input";
+    hiddenInput.style.display = "none";
+
     copyButton.addEventListener("click", () => {
-      copyToClipboard(timer.coords)
-        .then(() => {
-          copyButton.textContent = "Copié !";
-          setTimeout(() => {
-            copyButton.textContent = "Copier";
-          }, 1000);
-        })
-        .catch(() => {
-          alert("Impossible de copier automatiquement. Copiez manuellement : " + timer.coords);
-        });
+      hiddenInput.style.display = "block";
+      hiddenInput.focus();
+      hiddenInput.select();
     });
 
-    copyCell.appendChild(copyButton);
+    copyContainer.appendChild(copyButton);
+    copyContainer.appendChild(hiddenInput);
+    copyCell.appendChild(copyContainer);
 
     row.appendChild(nameCell);
     row.appendChild(controlCell);
@@ -132,6 +170,7 @@ function renderTimers() {
   });
 
   saveState();
+  updateTimers();
 }
 
 function updateTimers() {
@@ -142,7 +181,6 @@ function updateTimers() {
     const totalDuration = timer.durationHours * 3600 * 1000;
 
     if (!s.endTime) {
-      // Affichage compteur complet même inactif
       displayTime(elements.counterSpan, totalDuration);
       elements.checkbox.checked = false;
       return;
@@ -167,32 +205,8 @@ function displayTime(element, ms) {
   const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((ms % (1000 * 60)) / 1000);
 
-  element.textContent = `${hours}h ${minutes}m ${seconds}s`;
-}
-
-// Clipboard robuste compatible iframe
-function copyToClipboard(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(text);
-  } else {
-    return new Promise((resolve, reject) => {
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.style.position = "fixed";
-      textarea.style.left = "-9999px";
-      document.body.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
-      try {
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        resolve();
-      } catch (err) {
-        document.body.removeChild(textarea);
-        reject(err);
-      }
-    });
-  }
+  element.textContent =
+    `${hours}h ${minutes}m ${seconds}s`;
 }
 </script>
 
