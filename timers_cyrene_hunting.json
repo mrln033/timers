@@ -1,188 +1,272 @@
 [
   {
     "id": "cyr_h_1",
+    "name": "5P1D3R Gen I Daily (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 138488, 77361, 104, Aran]"
+  },
+  {
+    "id": "cyr_h_2",
     "name": "A.R.C. Faction Mission - Stage 1 - Daily - Devastator Sea Wraith (21h)",
     "durationHours": 21,
     "coords": "/wp [Planet Cyrene, 133308, 74891, 110, A.R.C. Faction Mission Terminal]"
   },
   {
-    "id": "cyr_h_2",
+    "id": "cyr_h_3",
     "name": "A.R.C. Faction Mission - Stage 1 - Daily - Mutated Dire Weed (21h)",
     "durationHours": 21,
     "coords": "/wp [Planet Cyrene, 133308, 74891, 110, A.R.C. Faction Mission Terminal]"
   },
   {
-    "id": "cyr_h_3",
+    "id": "cyr_h_4",
     "name": "A.R.C. Faction Mission - Stage 1 - Daily - Old Paneleon (21h)",
     "durationHours": 21,
     "coords": "/wp [Planet Cyrene, 133308, 74891, 110, A.R.C. Faction Mission Terminal]"
   },
   {
-    "id": "cyr_h_4",
+    "id": "cyr_h_5",
     "name": "A.R.C. Faction Mission - Stage 1 - Daily - Scout Bot Collector XT (21h)",
     "durationHours": 21,
     "coords": "/wp [Planet Cyrene, 133308, 74891, 110, A.R.C. Faction Mission Terminal]"
   },
   {
-    "id": "cyr_h_5",
+    "id": "cyr_h_6",
     "name": "A.R.C. Faction Mission - Stage 1 - Daily - Swamp Lurker (21h=",
     "durationHours": 21,
     "coords": "/wp [Planet Cyrene, 133308, 74891, 110, A.R.C. Faction Mission Terminal]"
   },
   {
-    "id": "cyr_h_6",
-    "name": "Meet the Tanhok... (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 139014, 77450, 104, Malbow]"
-  },
-  {
     "id": "cyr_h_7",
-    "name": "Meet the Turrelions... (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138730, 77863, 102, Zentab]"
+    "name": "Arms Merchant – Ozpyn Trader Laser and BLP (14j)",
+    "durationHours": 336,
+    "coords": "/wp [Planet Cyrene, 138900, 77751, 132, Private ‘Snow’ Landon]"
   },
   {
     "id": "cyr_h_8",
-    "name": "Meet the Zyn'Kimbro... (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138970, 77914, 108, Tornauk]"
+    "name": "Atlas Haven Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 138583, 76341, 119, Imperium Ranger - Tier 1 - Atlas]"
   },
   {
     "id": "cyr_h_9",
-    "name": "Duvall's Daily: Stalker Bots (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138447, 77428, 102, Second Hand Hub Duvall]"
-  },
-  {
-    "id": "cyr_h_10",
-    "name": "Duvall's Daily: Living Vortex (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138447, 77428, 102, Second Hand Hub Duvall]"
-  },
-  {
-    "id": "cyr_h_11",
-    "name": "Getting Slimed! (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138377, 77671, 121, Captain Wrigley]"
-  },
-  {
-    "id": "cyr_h_12",
-    "name": "Ground the Skies (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
-  },
-  {
-    "id": "cyr_h_13",
-    "name": "Merfolken Beach Head? (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138821, 77114, 113, Scout McCulloch]"
-  },
-  {
-    "id": "cyr_h_14",
-    "name": "Pict's Pollen Issue (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138353, 77634, 122, Zyn'Kimbro Gatherer Pict]"
-  },
-  {
-    "id": "cyr_h_15",
-    "name": "Pluck the Wing (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
-  },
-  {
-    "id": "cyr_h_16",
-    "name": "Poison the Hive (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
-  },
-  {
-    "id": "cyr_h_17",
-    "name": "Scrap the Drone (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
-  },
-  {
-    "id": "cyr_h_18",
-    "name": "Stomp the Wolf (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
-  },
-  {
-    "id": "cyr_h_19",
-    "name": "They're taking our minerals! (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 133208, 75012, 110, Scout Thompkins]"
-  },
-  {
-    "id": "cyr_h_20",
-    "name": "Test of Strength! (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138350, 77613, 120, Zyn'Kimbro Farm Hand]"
-  },
-  {
-    "id": "cyr_h_21",
-    "name": "Test of Courage! (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 138397, 77813, 102, Zyn'Kimbro Fisherman Dyion]"
-  },
-  {
-    "id": "cyr_h_22",
-    "name": "Destroy the Robot Menace (24h)",
-    "durationHours": 24,
-    "coords": "/wp [Planet Cyrene, 138889, 77248, 101, Lt. Johnson]"
-  },
-  {
-    "id": "cyr_h_23",
-    "name": "Lord Pyscidon (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 133204, 75014, 110, A.R.C. Terminal]"
-  },
-  {
-    "id": "cyr_h_24",
-    "name": "Regent Halbird (21h)",
-    "durationHours": 21,
-    "coords": "/wp [Planet Cyrene, 133204, 75014, 110, A.R.C. Terminal]"
-  },
-  {
-    "id": "cyr_h_25",
-    "name": "Lookin' Out (24h ?)",
-    "durationHours": 24,
-    "coords": "/wp [Planet Cyrene, 136234, 75625, 109, Belladoth]"
-  },
-  {
-    "id": "cyr_h_26",
-    "name": "Settler's Life (24h ?)",
-    "durationHours": 24,
-    "coords": "/wp [Planet Cyrene, 136234, 75625, 109, Belladoth]"
-  },
-  {
-    "id": "cyr_h_27",
     "name": "Collecting Data: Renegade Hazard Zone Mechs (42h)",
     "durationHours": 42,
     "coords": "/wp [Planet Cyrene, 135904, 80902, 132, Collector Nat]"
   },
   {
-    "id": "cyr_h_28",
-    "name": "The Chief's Request! (4j)",
-    "durationHours": 96,
-    "coords": "/wp [Planet Cyrene, 138315, 77717, 119, Zyn'Kimbro Chieftain Koban]"
+    "id": "cyr_h_10",
+    "name": "Destroy the Robot Menace (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 138889, 77248, 101, Lt. Johnson]"
   },
   {
-    "id": "cyr_h_29",
+    "id": "cyr_h_11",
     "name": "Doctor Bylar - Island Biome Skill Up (7j)",
     "durationHours": 168,
     "coords": "/wp [Planet Cyrene, 137544, 80897, 100, Doctor Byler]"
   },
   {
-    "id": "cyr_h_30",
+    "id": "cyr_h_12",
+    "name": "Doctor Bylar - Paneleon Control (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 137544, 80897, 100, Doctor Byler]"
+  },
+  {
+    "id": "cyr_h_13",
+    "name": "Doctor Bylar - Skill Up? (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 137544, 80897, 100, Doctor Byler]"
+  },
+  {
+    "id": "cyr_h_14",
     "name": "Doctor Bylar - Strong Zeladoth Control (7j)",
     "durationHours": 168,
     "coords": "/wp [Planet Cyrene, 137544, 80897, 100, Doctor Byler]"
   },
   {
-    "id": "cyr_h_31",
-    "name": "...",
+    "id": "cyr_h_15",
+    "name": "Doctor Bylar - Weak Zeladoth Control (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 137544, 80897, 100, Doctor Byler]"
+  },
+  {
+    "id": "cyr_h_16",
+    "name": "Drill into the system (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 138848, 76901, 103, Reprogrammed Drill Bot]"
+  },
+  {
+    "id": "cyr_h_17",
+    "name": "Duvall's Daily: Living Vortex (21h)",
     "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138447, 77428, 102, Second Hand Hub Duvall]"
+  },
+  {
+    "id": "cyr_h_18",
+    "name": "Duvall's Daily: Stalker Bots (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138447, 77428, 102, Second Hand Hub Duvall]"
+  },
+  {
+    "id": "cyr_h_19",
+    "name": "Getting Slimed! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138377, 77671, 121, Captain Wrigley]"
+  },
+  {
+    "id": "cyr_h_20",
+    "name": "Ground the Skies (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
+  },
+  {
+    "id": "cyr_h_21",
+    "name": "Island Biome Imperium Ranger Hunt! 24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 137425, 80713, 112, Imperium Ranger - Tier 3 - Biome]"
+  },
+  {
+    "id": "cyr_h_22",
+    "name": "Isle de Zel Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 137955, 75290, 114, Imperium Ranger - Tier 3 - Zel]"
+  },
+  {
+    "id": "cyr_h_23",
+    "name": "Lookin' Out (24h ?)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 136234, 75625, 109, Belladoth]"
+  },
+  {
+    "id": "cyr_h_24",
+    "name": "Lord Pyscidon (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 133204, 75014, 110, A.R.C. Terminal]"
+  },
+  {
+    "id": "cyr_h_25",
+    "name": "Manuthale Swamp Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 131901, 75632, 129, Imperium Ranger - Tier 1 - Swamp]"
+  },
+  {
+    "id": "cyr_h_26",
+    "name": "Meet the Tanhok... (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 139014, 77450, 104, Malbow]"
+  },
+  {
+    "id": "cyr_h_27",
+    "name": "Meet the Turrelions... (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138730, 77863, 102, Zentab]"
+  },
+  {
+    "id": "cyr_h_28",
+    "name": "Meet the Zyn Tailor - You call these pheromones?! (48h)",
+    "durationHours": 48,
+    "coords": "/wp [Planet Cyrene, 138045, 78750, 166, Al'Bryt Hoizyn]"
+  },
+  {
+    "id": "cyr_h_29",
+    "name": "Meet the Zyn'Kimbro... (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138970, 77914, 108, Tornauk]"
+  },
+  {
+    "id": "cyr_h_30",
+    "name": "Merfolken Beach Head? (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138821, 77114, 113, Scout McCulloch]"
+  },
+  {
+    "id": "cyr_h_31",
+    "name": "Paneleon Hunter Jameson’s Mission (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138938, 77823, 134, Paneleon Hunter Jameson]"
+  },
+  {
+    "id": "cyr_h_32",
+    "name": "Pict's Pollen Issue (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138353, 77634, 122, Zyn'Kimbro Gatherer Pict]"
+  },
+  {
+    "id": "cyr_h_33",
+    "name": "Pluck the Wing (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
+  },
+  {
+    "id": "cyr_h_34",
+    "name": "Poison the Hive (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
+  },
+  {
+    "id": "cyr_h_35",
+    "name": "Regent Halbird (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 133204, 75014, 110, A.R.C. Terminal]"
+  },
+  {
+    "id": "cyr_h_36",
+    "name": "Robot Base ZRQ Imperium Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 131891, 77821, 110, Imperium Ranger - Tier 2 - ZRQ]"
+  },
+  {
+    "id": "cyr_h_37",
+    "name": "Scrap the Drone (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
+  },
+  {
+    "id": "cyr_h_38",
+    "name": "Settler's Life (24h ?)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 136234, 75625, 109, Belladoth]"
+  },
+  {
+    "id": "cyr_h_39",
+    "name": "Stomp the Wolf (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138851, 77077, 112, James Henry]"
+  },
+  {
+    "id": "cyr_h_40",
+    "name": "Tanhok Decorator Bur'Kys - Hunters Decoration Blueprints (7j)",
+    "durationHours": 168,
     "coords": "..."
+  },
+  {
+    "id": "cyr_h_41",
+    "name": "Test of Courage! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138397, 77813, 102, Zyn'Kimbro Fisherman Dyion]"
+  },
+  {
+    "id": "cyr_h_42",
+    "name": "Test of Strength! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138350, 77613, 120, Zyn'Kimbro Farm Hand]"
+  },
+  {
+    "id": "cyr_h_43",
+    "name": "The Chief's Request! (4j)",
+    "durationHours": 96,
+    "coords": "/wp [Planet Cyrene, 138315, 77717, 119, Zyn'Kimbro Chieftain Koban]"
+  },
+  {
+    "id": "cyr_h_44",
+    "name": "They're taking our minerals! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 133208, 75012, 110, Scout Thompkins]"
+  },
+  {
+    "id": "cyr_h_45",
+    "name": "Turrelion Desert Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 135886, 79766, 158, Imperium Ranger - Tier 2 - Desert]"
   }
 ]
