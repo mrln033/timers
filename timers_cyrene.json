@@ -1,0 +1,63 @@
+[
+  {
+    "id": "cyr1",
+    "name": "Ben's Polka Dot Blueprint - Pleak Feathers (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Arkadia, 219, 108, 123, Waypoint]"
+  },
+  {
+    "id": "cyr2",
+    "name": "Island Biome Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 137425, 80713, 112, Island Biome Imperium Ranger Hunt!]"
+  },
+  {
+    "id": "cyr3",
+    "name": "Isle de Zel Imperium Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 137955, 75290, 114, Isle de Zel Imperium Hunt!]"
+  },
+  {
+    "id": "cyr4",
+    "name": "Manuthale Swamp Imperium Ranger Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 131901, 75632, 129, Manuthale Swamp Imperium Ranger Hunt!]"
+  }
+  {
+    "id": "cyr5",
+    "name": "Paneleon Hunter Jameson’s Mission (21h)",
+    "durationHours": 21,
+    "coords": "50.6292, 3.0573"
+  }
+  {
+    "id": "cyr6",
+    "name": "Robot Base Z.R.Q. Imperium Hunt! (24h)",
+    "durationHours": 24,
+    "coords": "/wp [Planet Cyrene, 131891, 77821, 110, Robot Base Z.R.Q. Imperium Hunt!]"
+  }
+  {
+    "id": "cyr7",
+    "name": "Test of Strength (21h)",
+    "durationHours": 21,
+    "coords": "50.6292, 3.0573"
+  }
+  {
+    "id": "cyr8",
+    "name": "cyr8",
+    "durationHours": 24,
+    "coords": "50.6292, 3.0573"
+  }
+  {
+    "id": "cyr9",
+    "name": "cyr9",
+    "durationHours": 24,
+    "coords": "50.6292, 3.0573"
+  }
+]
+{
+    "id": "cyr10",
+    "name": "cyr10",
+    "durationHours": 24,
+    "coords": "50.6292, 3.0573"
+  }
+
