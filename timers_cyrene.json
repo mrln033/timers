@@ -1,5 +1,11 @@
 [
   {
+    "id": "cyr8",
+    "name": "Auraforger and You: Collecting Sweat For 'Axe' (21h)",
+    "durationHours": 21,
+    "coords": "50.6292, 3.0573"
+  },
+  {
     "id": "cyr1",
     "name": "Ben's Polka Dot Blueprint - Pleak Feathers (24h)",
     "durationHours": 24,
@@ -39,12 +45,6 @@
     "id": "cyr7",
     "name": "Test of Strength (21h)",
     "durationHours": 21,
-    "coords": "50.6292, 3.0573"
-  },
-  {
-    "id": "cyr8",
-    "name": "cyr8",
-    "durationHours": 24,
     "coords": "50.6292, 3.0573"
   },
   {
