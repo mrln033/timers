@@ -3,25 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Daily Mission = A.R.I.S.</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-}
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 700px;
-}
-th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-button {
-  padding: 4px 8px;
-  cursor: pointer;
-}
-</style>
+ <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 600px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+    }
+
+    th {
+      background: #f2f2f2;
+      text-align: left;
+    }
+
+    .timer-cell {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.2rem;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .time {
+      font-family: monospace;
+      font-size: 1.3rem;
+    }
+  </style>
+
 </head>
 <body>
 
@@ -39,7 +60,7 @@ button {
 </table>
 
 <script>
-const STORAGE_KEY = "timers_state_v1";
+const STORAGE_KEY = "timers_aris";
 let configTimers = [];
 let state = {};
 
@@ -160,3 +181,4 @@ function updateTimers() {
 
 </body>
 </html>
+
