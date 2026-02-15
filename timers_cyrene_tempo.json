@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cyr_t_1",
+    "name": "Puny Tempo Trial - Crystal Pede (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138045, 77123, 100, Crystal Pede Tempo Manager]"
+  },
+  {
+    "id": "cyr_t_2",
+    "name": "Puny Tempo Trial - Dire Weed (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 137526, 77527, 110, Dire Weed Tempo Manager]"
+  },
+  {
+    "id": "cyr_t_3",
+    "name": "Puny Tempo Trial - Junk Bot (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138026, 76827, 101, Junk Bot Tempo Manager]"
+  },
+  {
+    "id": "cyr_t_4",
+    "name": "Puny Tempo Trial - Pleak (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 137956, 77501, 111, Pleak Tempo Manager]"
+  },
+  {
+    "id": "cyr_t_5",
+    "name": "Puny Tempo Trial - Tree Dragon (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 137788, 77024, 103, Tree Dragon Tempo Manager]"
+  },
+  {
+    "id": "cyr_t_6",
+    "name": "Zyn'Nix Tempo - Adult Horned Birds (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 134786, 75166, 119, Zyn'Nix Tempo Manager - Horned Bird]"
+  },
+  {
+    "id": "cyr_t_7",
+    "name": "Zyn'Nix Tempo - Duster Workers (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 134376, 75137, 105, Zyn'Nix Tempo Manager - Duster Workers]"
+  },
+  {
+    "id": "cyr_t_8",
+    "name": "Zyn'Nix Tempo - Guardian Dire Plants (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 134426, 74867, 103, Zyn'Nix Tempo Manager - Guardian Dire Plants]"
+  },
+  {
+    "id": "cyr_t_9",
+    "name": "Zyn'Nix Tempo - Mature Skywraiths",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 134736, 74587, 171, Zyn'Nix Tempo Manager - Sky Wraiths]"
+  },
+  {
+    "id": "cyr_t_10",
+    "name": "Zyn'Nix Tempo - Old Tide Claws (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 134742, 75107, 111, Zyn'Nix Tempo Manager - Tide Claw]"
+  }
+]
