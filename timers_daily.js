@@ -19,6 +19,7 @@
         configTimers = data;
         loadState();
         renderTimers();
+        updateTimers(); // affichage immédiat
         setInterval(updateTimers, 1000);
       });
 
@@ -35,12 +36,14 @@
 
       tableBody.innerHTML = "";
 
+      // Initialisation état si absent
       configTimers.forEach(timer => {
         if (!state[timer.id]) {
           state[timer.id] = { endTime: null };
         }
       });
 
+      // Tri : actifs d'abord puis alphabétique
       const sortedTimers = [...configTimers].sort((a, b) => {
 
         const aActive = !!state[a.id].endTime;
@@ -71,9 +74,11 @@
         }
 
         const row = document.createElement("tr");
+        row.setAttribute("data-id", timer.id);
 
         if (isActive) row.classList.add("active-row");
 
+        // ----- COLONNE NOM -----
         const nameCell = document.createElement("td");
         nameCell.textContent = timer.name;
 
@@ -84,6 +89,7 @@
           nameCell.appendChild(badge);
         }
 
+        // ----- COLONNE CONTROLE -----
         const controlCell = document.createElement("td");
         controlCell.className = "control-cell";
 
@@ -92,11 +98,10 @@
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.checked = isActive;
 
         const counterSpan = document.createElement("span");
         counterSpan.className = "counter";
-
-        checkbox.checked = isActive;
 
         checkbox.addEventListener("change", () => {
           if (checkbox.checked) {
@@ -113,6 +118,7 @@
         wrapper.appendChild(counterSpan);
         controlCell.appendChild(wrapper);
 
+        // ----- COLONNE COPY -----
         const copyCell = document.createElement("td");
 
         const copyContainer = document.createElement("div");
@@ -121,20 +127,19 @@
         const copyButton = document.createElement("button");
         copyButton.textContent = "Copier";
 
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "text";
-        hiddenInput.value = timer.coords;
-        hiddenInput.className = "copy-input";
-        hiddenInput.style.display = "none";
-
-        copyButton.addEventListener("click", () => {
-          hiddenInput.style.display = "block";
-          hiddenInput.focus();
-          hiddenInput.select();
+        copyButton.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(timer.coords);
+            copyButton.textContent = "Copié ✔";
+            setTimeout(() => {
+              copyButton.textContent = "Copier";
+            }, 1500);
+          } catch (err) {
+            alert("Impossible de copier automatiquement.");
+          }
         });
 
         copyContainer.appendChild(copyButton);
-        copyContainer.appendChild(hiddenInput);
         copyCell.appendChild(copyContainer);
 
         row.appendChild(nameCell);
@@ -142,12 +147,9 @@
         row.appendChild(copyCell);
 
         tableBody.appendChild(row);
-
-        timer._elements = { checkbox, counterSpan };
       });
 
       saveState();
-      updateTimers();
     }
 
     function addSectionHeader(text) {
@@ -160,50 +162,4 @@
       tableBody.appendChild(row);
     }
 
-    function updateTimers() {
-      configTimers.forEach(timer => {
-
-        const s = state[timer.id];
-        const elements = timer._elements;
-
-        const totalDuration = timer.durationHours * 3600 * 1000;
-
-        if (!s.endTime) {
-          displayTime(elements.counterSpan, totalDuration);
-          return;
-        }
-
-        const remaining = s.endTime - Date.now();
-
-        if (remaining <= 0) {
-          s.endTime = null;
-          saveState();
-          displayTime(elements.counterSpan, totalDuration);
-          renderTimers();
-          return;
-        }
-
-        displayTime(elements.counterSpan, remaining);
-      });
-    }
-
-    function displayTime(element, ms) {
-      const hours = Math.floor(ms / (1000 * 60 * 60));
-      const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((ms % (1000 * 60)) / 1000);
-      element.textContent = `${hours}h ${minutes}m ${seconds}s`;
-    }
-  }
-
-  // 🔹 Auto-initialisation via data-attributes
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector("[data-timers-config]");
-    if (!container) return;
-
-    const configUrl = container.dataset.timersConfig;
-    const storageKey = container.dataset.storageKey;
-
-    initTimers(configUrl, storageKey);
-  });
-
-})();
+    function updateTimers
