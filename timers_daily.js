@@ -13,13 +13,23 @@
     if (!tableBody) return;
 
     fetch(configUrl)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Erreur chargement JSON");
+        }
+        return res.json();
+      })
       .then(data => {
         configTimers = data;
         loadState();
         renderTimers();
         updateTimers();
         setInterval(updateTimers, 1000);
+      })
+      .catch(err => {
+        console.error(err);
+        tableBody.innerHTML =
+          "<tr><td colspan='4'>Erreur chargement JSON</td></tr>";
       });
 
     function loadState() {
@@ -65,16 +75,15 @@
 
       if (activeTimers.length > 0) {
         addSectionHeader("Timers actifs");
-        activeTimers.forEach(timer => addRow(timer, false));
+        activeTimers.forEach(timer => addRow(timer));
       }
 
       if (inactiveTimers.length > 0) {
         addSectionHeader("Timers inactifs");
+
         inactiveTimers.forEach(timer => {
-
           if (showOnlySelected && !state[timer.id].selected) return;
-
-          addRow(timer, true);
+          addRow(timer);
         });
       }
 
@@ -92,7 +101,7 @@
       tableBody.appendChild(row);
     }
 
-    function addRow(timer, isInactiveSection) {
+    function addRow(timer) {
 
       const isActive = !!state[timer.id].endTime;
 
@@ -101,7 +110,7 @@
 
       if (isActive) row.classList.add("active-row");
 
-      // ----- Sélection
+      // Sélection
       const selectCell = document.createElement("td");
       const selectBox = document.createElement("input");
       selectBox.type = "checkbox";
@@ -115,7 +124,7 @@
 
       selectCell.appendChild(selectBox);
 
-      // ----- Nom
+      // Nom
       const nameCell = document.createElement("td");
       nameCell.textContent = timer.name;
 
@@ -126,7 +135,7 @@
         nameCell.appendChild(badge);
       }
 
-      // ----- Timer
+      // Timer
       const controlCell = document.createElement("td");
       controlCell.className = "control-cell";
 
@@ -155,7 +164,7 @@
       wrapper.appendChild(counterSpan);
       controlCell.appendChild(wrapper);
 
-      // ----- Copier
+      // Copier
       const copyCell = document.createElement("td");
       const copyButton = document.createElement("button");
       copyButton.textContent = "Copier";
@@ -226,7 +235,8 @@
     function updateSelectionCounter() {
       const total = configTimers.length;
       const selected = configTimers.filter(t => state[t.id].selected).length;
-      selectionCounter.textContent = `Sélectionnés : ${selected} / ${total}`;
+      selectionCounter.textContent =
+        `Sélectionnés : ${selected} / ${total}`;
     }
 
     filterCheckbox.addEventListener("change", renderTimers);
