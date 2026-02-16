@@ -169,15 +169,45 @@
       const copyButton = document.createElement("button");
       copyButton.textContent = "Copier";
 
-      copyButton.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(timer.coords);
-          copyButton.textContent = "Copié ✔";
-          setTimeout(() => copyButton.textContent = "Copier", 1500);
-        } catch {
-          alert("Impossible de copier.");
-        }
-      });
+copyButton.addEventListener("click", async () => {
+
+  const text = timer.coords;
+
+  // 1️⃣ Essai API moderne
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      feedbackSuccess();
+      return;
+    } catch {}
+  }
+
+  // 2️⃣ Fallback execCommand
+  try {
+    const tempInput = document.createElement("textarea");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    feedbackSuccess();
+    return;
+  } catch {}
+
+  // 3️⃣ Dernier fallback : sélection manuelle
+  alert("Copie automatique bloquée. Texte sélectionné.");
+  const tempInput = document.createElement("textarea");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+});
+
+function feedbackSuccess() {
+  copyButton.textContent = "Copié ✔";
+  setTimeout(() => {
+    copyButton.textContent = "Copier";
+  }, 1500);
+}
 
       copyCell.appendChild(copyButton);
 
@@ -253,3 +283,4 @@
   });
 
 })();
+
