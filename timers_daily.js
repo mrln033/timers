@@ -12,10 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function initTimers(configUrl, storageKey, container) {
 
   const STORAGE_KEY = storageKey;
-
   const tableBody = container.querySelector("#timersTable");
-  const filterCheckbox = container.querySelector("#filterSelected");
-  const counterDisplay = container.querySelector("#selectionCounter");
 
   let configTimers = [];
   let state = {};
@@ -40,33 +37,15 @@ function initTimers(configUrl, storageKey, container) {
         };
       }
     });
-
-    if (state._filterSelected === undefined) {
-      state._filterSelected = false;
-    }
-
-    if (filterCheckbox) {
-      filterCheckbox.checked = state._filterSelected;
-    }
   }
 
   function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
-  if (filterCheckbox) {
-    filterCheckbox.addEventListener("change", () => {
-      state._filterSelected = filterCheckbox.checked;
-      saveState();
-      renderTimers();
-    });
-  }
-
   function renderTimers() {
 
     tableBody.innerHTML = "";
-
-    const showOnlySelected = !!state._filterSelected;
 
     const activeTimers = configTimers
       .filter(t => state[t.id].active)
@@ -91,16 +70,11 @@ function initTimers(configUrl, storageKey, container) {
       activeTimers.forEach(timer => addRow(timer));
     }
 
-    const filteredInactive = showOnlySelected
-      ? inactiveTimers.filter(t => state[t.id].selected)
-      : inactiveTimers;
-
-    if (filteredInactive.length > 0) {
+    if (inactiveTimers.length > 0) {
       addSectionTitle("INACTIFS");
-      filteredInactive.forEach(timer => addRow(timer));
+      inactiveTimers.forEach(timer => addRow(timer));
     }
 
-    updateCounter();
     saveState();
   }
 
@@ -120,6 +94,7 @@ function initTimers(configUrl, storageKey, container) {
 
     const tr = document.createElement("tr");
 
+    // Sélection
     const tdSelect = document.createElement("td");
     const selectBox = document.createElement("input");
     selectBox.type = "checkbox";
@@ -132,9 +107,11 @@ function initTimers(configUrl, storageKey, container) {
 
     tdSelect.appendChild(selectBox);
 
+    // Nom
     const tdName = document.createElement("td");
     tdName.textContent = timer.name;
 
+    // Actif
     const tdActive = document.createElement("td");
     const activeBox = document.createElement("input");
     activeBox.type = "checkbox";
@@ -147,6 +124,7 @@ function initTimers(configUrl, storageKey, container) {
 
     tdActive.appendChild(activeBox);
 
+    // Coordonnées
     const tdCoords = document.createElement("td");
     tdCoords.textContent = timer.coordinates || "";
 
@@ -156,15 +134,5 @@ function initTimers(configUrl, storageKey, container) {
     tr.appendChild(tdCoords);
 
     tableBody.appendChild(tr);
-  }
-
-  function updateCounter() {
-    const total = configTimers.length;
-    const selectedCount = configTimers.filter(t => state[t.id].selected).length;
-
-    if (counterDisplay) {
-      counterDisplay.textContent =
-        `Sélectionnés : ${selectedCount} / ${total}`;
-    }
   }
 }
