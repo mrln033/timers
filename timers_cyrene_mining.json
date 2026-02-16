@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cyr_mi_1",
+    "name": "A.R.C. Faction Mission - Stage 2 - Mining #1 (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138461, 77300, 101, Leigh - A.R.C. Relief Collections]"
+  },
+  {
+    "id": "cyr_mi_2",
+    "name": "A.R.C. Faction Mission - Stage 2 - Mining #2 (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138461, 77300, 101, Leigh - A.R.C. Relief Collections]"
+  },
+  {
+    "id": "cyr_mi_3",
+    "name": "A.R.C. Faction Mission - Stage 2 - Mining #3 (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138461, 77300, 101, Leigh - A.R.C. Relief Collections]"
+  },
+  {
+    "id": "cyr_mi_4",
+    "name": "A.R.C. Faction Mission - Stage 2 - Mining #4 (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138461, 77300, 101, Leigh - A.R.C. Relief Collections]"
+  },
+  {
+    "id": "cyr_mi_5",
+    "name": "A.R.C. Faction Mission - Stage 2 - Mining #5 (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138461, 77300, 101, Leigh - A.R.C. Relief Collections]"
+  },
+  {
+    "id": "cyr_mi_6",
+    "name": "Mine Up Iridium Ore! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138850, 77080, 112, Will Andrews]"
+  },
+  {
+    "id": "cyr_mi_7",
+    "name": "Mine Up Kaisenite Stone! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138850, 77080, 112, Will Andrews]"
+  },
+  {
+    "id": "cyr_mi_8",
+    "name": "Mine Up Yellow Crystal! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138850, 77080, 112, Will Andrews]"
+  },
+  {
+    "id": "cyr_mi_9",
+    "name": "Mine Up Zorn Star Ore! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138850, 77080, 112, Will Andrews]"
+  },
+  {
+    "id": "cyr_mi_10",
+    "name": "Mine Up Blue Crystal! (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 138850, 77080, 112, Will Andrews]"
+  }
+  ]
