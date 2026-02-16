@@ -84,6 +84,11 @@ table td:nth-child(1) {
   width: 60px;
 }
 
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 150px;
+}
+
 table th:nth-child(4),
 table td:nth-child(4) {
   width: 110px;
@@ -93,4 +98,5 @@ table td:nth-child(4) {
 table {
   table-layout: fixed;
 }
+
 
