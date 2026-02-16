@@ -31,9 +31,10 @@ h2 {
 
 .top-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .filter-label {
@@ -204,4 +205,27 @@ button {
 
 .mission-card.disabled:hover {
   transform: none;
+}
+
+/* ===== BACK BUTTON ===== */
+
+.back-button {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #607d8b, #78909c);
+  color: white;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.back-button:active {
+  transform: translateY(0);
 }
