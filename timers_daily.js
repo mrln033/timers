@@ -31,124 +31,162 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    function renderTimers() {
+function renderTimers() {
 
-      tableBody.innerHTML = "";
+  tableBody.innerHTML = "";
 
-      configTimers.forEach(timer => {
-        if (!state[timer.id]) {
-          state[timer.id] = { endTime: null };
-        }
-      });
-
-      const sortedTimers = [...configTimers].sort((a, b) => {
-
-        const aActive = !!state[a.id].endTime;
-        const bActive = !!state[b.id].endTime;
-
-        if (aActive !== bActive) {
-          return bActive - aActive;
-        }
-
-        return a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
-      });
-
-      let activeSectionAdded = false;
-      let inactiveSectionAdded = false;
-
-      sortedTimers.forEach(timer => {
-
-        const isActive = !!state[timer.id].endTime;
-
-        if (isActive && !activeSectionAdded) {
-          addSectionHeader("Timers actifs");
-          activeSectionAdded = true;
-        }
-
-        if (!isActive && !inactiveSectionAdded) {
-          addSectionHeader("Timers inactifs");
-          inactiveSectionAdded = true;
-        }
-
-        const row = document.createElement("tr");
-
-        if (isActive) row.classList.add("active-row");
-
-        const nameCell = document.createElement("td");
-        nameCell.textContent = timer.name;
-
-        if (isActive) {
-          const badge = document.createElement("span");
-          badge.textContent = "Actif";
-          badge.className = "badge-active";
-          nameCell.appendChild(badge);
-        }
-
-        const controlCell = document.createElement("td");
-        controlCell.className = "control-cell";
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "control-wrapper";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-
-        const counterSpan = document.createElement("span");
-        counterSpan.className = "counter";
-
-        checkbox.checked = isActive;
-
-        checkbox.addEventListener("change", () => {
-          if (checkbox.checked) {
-            state[timer.id].endTime =
-              Date.now() + timer.durationHours * 3600 * 1000;
-          } else {
-            state[timer.id].endTime = null;
-          }
-          saveState();
-          renderTimers();
-        });
-
-        wrapper.appendChild(checkbox);
-        wrapper.appendChild(counterSpan);
-        controlCell.appendChild(wrapper);
-
-        const copyCell = document.createElement("td");
-
-        const copyContainer = document.createElement("div");
-        copyContainer.className = "copy-container";
-
-        const copyButton = document.createElement("button");
-        copyButton.textContent = "Copier";
-
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "text";
-        hiddenInput.value = timer.coords;
-        hiddenInput.className = "copy-input";
-        hiddenInput.style.display = "none";
-
-        copyButton.addEventListener("click", () => {
-          hiddenInput.style.display = "block";
-          hiddenInput.focus();
-          hiddenInput.select();
-        });
-
-        copyContainer.appendChild(copyButton);
-        copyContainer.appendChild(hiddenInput);
-        copyCell.appendChild(copyContainer);
-
-        row.appendChild(nameCell);
-        row.appendChild(controlCell);
-        row.appendChild(copyCell);
-
-        tableBody.appendChild(row);
-
-        timer._elements = { checkbox, counterSpan };
-      });
-
-      saveState();
-      updateTimers();
+  configTimers.forEach(timer => {
+    if (!state[timer.id]) {
+      state[timer.id] = {
+        endTime: null,
+        selected: false
+      };
     }
+
+    if (state[timer.id].selected === undefined) {
+      state[timer.id].selected = false;
+    }
+  });
+
+  const sortedTimers = [...configTimers].sort((a, b) => {
+
+    const aActive = !!state[a.id].endTime;
+    const bActive = !!state[b.id].endTime;
+
+    // 🔵 Actifs en premier
+    if (aActive !== bActive) {
+      return bActive - aActive;
+    }
+
+    // 🟢 Si ACTIFS → tri nom uniquement
+    if (aActive && bActive) {
+      return a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
+    }
+
+    // ⚪ Si INACTIFS → tri sélection puis nom
+    const aSelected = !!state[a.id].selected;
+    const bSelected = !!state[b.id].selected;
+
+    if (aSelected !== bSelected) {
+      return bSelected - aSelected;
+    }
+
+    return a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
+  });
+
+  let activeSectionAdded = false;
+  let inactiveSectionAdded = false;
+
+  sortedTimers.forEach(timer => {
+
+    const isActive = !!state[timer.id].endTime;
+    const isSelected = !!state[timer.id].selected;
+
+    if (isActive && !activeSectionAdded) {
+      addSectionHeader("Timers actifs");
+      activeSectionAdded = true;
+    }
+
+    if (!isActive && !inactiveSectionAdded) {
+      addSectionHeader("Timers inactifs");
+      inactiveSectionAdded = true;
+    }
+
+    const row = document.createElement("tr");
+    if (isActive) row.classList.add("active-row");
+
+    // ✅ COLONNE 1 — Sélection
+    const selectCell = document.createElement("td");
+    const selectCheckbox = document.createElement("input");
+    selectCheckbox.type = "checkbox";
+    selectCheckbox.checked = isSelected;
+
+    selectCheckbox.addEventListener("change", () => {
+      state[timer.id].selected = selectCheckbox.checked;
+      saveState();
+      renderTimers(); // re-tri immédiat
+    });
+
+    selectCell.appendChild(selectCheckbox);
+
+    // ✅ COLONNE 2 — Nom
+    const nameCell = document.createElement("td");
+    nameCell.textContent = timer.name;
+
+    if (isActive) {
+      const badge = document.createElement("span");
+      badge.textContent = " Actif";
+      badge.className = "badge-active";
+      nameCell.appendChild(badge);
+    }
+
+    // ✅ COLONNE 3 — Actif / compteur
+    const controlCell = document.createElement("td");
+    controlCell.className = "control-cell";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "control-wrapper";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = isActive;
+
+    const counterSpan = document.createElement("span");
+    counterSpan.className = "counter";
+
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        state[timer.id].endTime =
+          Date.now() + timer.durationHours * 3600 * 1000;
+      } else {
+        state[timer.id].endTime = null;
+      }
+      saveState();
+      renderTimers();
+    });
+
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(counterSpan);
+    controlCell.appendChild(wrapper);
+
+    // ✅ COLONNE 4 — Copier
+    const copyCell = document.createElement("td");
+
+    const copyContainer = document.createElement("div");
+    copyContainer.className = "copy-container";
+
+    const copyButton = document.createElement("button");
+    copyButton.textContent = "Copier";
+
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "text";
+    hiddenInput.value = timer.coords;
+    hiddenInput.className = "copy-input";
+    hiddenInput.style.display = "none";
+
+    copyButton.addEventListener("click", () => {
+      hiddenInput.style.display = "block";
+      hiddenInput.focus();
+      hiddenInput.select();
+    });
+
+    copyContainer.appendChild(copyButton);
+    copyContainer.appendChild(hiddenInput);
+    copyCell.appendChild(copyContainer);
+
+    row.appendChild(selectCell);
+    row.appendChild(nameCell);
+    row.appendChild(controlCell);
+    row.appendChild(copyCell);
+
+    tableBody.appendChild(row);
+
+    timer._elements = { checkbox, counterSpan };
+  });
+
+  saveState();
+  updateTimers();
+}
 
     function addSectionHeader(text) {
       const row = document.createElement("tr");
