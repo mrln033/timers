@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>-= Daily Missions = A.R.I.S. =-</title>
+<link rel="stylesheet" href="styles_daily.css">
+</head>
+<body>
+
+<h2>-= Daily Mission = A.R.I.S.</h2>
+
+<div class="top-bar">
+
+  <button class="back-button" onclick="window.location.href='index.html'">
+    ⬅ Retour
+  </button>
+
+  <div id="selectionCounter" class="selection-counter"></div>
+
+  <label class="filter-label">
+    <input type="checkbox" id="filterSelected">
+    Afficher seulement sélectionnés
+  </label>
+
+</div>
+
+<div data-timers-config="timers_aris.json"
+     data-storage-key="timers_aris">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sél.</th>
+        <th>Mission</th>
+        <th>Timer</th>
+        <th>Coordonnées</th>
+      </tr>
+    </thead>
+    <tbody id="timersTable"></tbody>
+  </table>
+
+</div>
+
+<script src="timers_daily.js"></script>
+
+</body>
+</html>
