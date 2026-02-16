@@ -291,3 +291,32 @@ button {
   transform: translateY(0);
 }
 
+/* ===== SELECTION BADGE ===== */
+
+.selection-counter {
+  justify-self: center;
+}
+
+.selection-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: white;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+/* Animation quand mise à jour */
+.selection-badge.updated {
+  animation: badgePulse 0.4s ease;
+}
+
+@keyframes badgePulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}

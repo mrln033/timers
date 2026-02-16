@@ -262,12 +262,30 @@ function feedbackSuccess() {
         `${s.toString().padStart(2, "0")}s`;
     }
 
-    function updateSelectionCounter() {
-      const total = configTimers.length;
-      const selected = configTimers.filter(t => state[t.id].selected).length;
-      selectionCounter.textContent =
-        `Sélectionnés : ${selected} / ${total}`;
-    }
+function updateSelectionCounter() {
+  const total = configTimers.length;
+  const selected = configTimers.filter(t => state[t.id].selected).length;
+
+  const newText = `Sélectionnés : ${selected} / ${total}`;
+
+  // Premier affichage
+  if (!selectionCounter.querySelector(".selection-badge")) {
+    selectionCounter.innerHTML =
+      `<span class="selection-badge">${newText}</span>`;
+    return;
+  }
+
+  const badge = selectionCounter.querySelector(".selection-badge");
+
+  // Si la valeur change → animation
+  if (badge.textContent !== newText) {
+    badge.textContent = newText;
+
+    badge.classList.remove("updated");
+    void badge.offsetWidth; // force reflow (important)
+    badge.classList.add("updated");
+  }
+}
 
     filterCheckbox.addEventListener("change", renderTimers);
   }
