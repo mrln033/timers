@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>-= Missions Repetables = Cyrene = Autres... =-</title>
+<link rel="stylesheet" href="styles_daily.css">
+</head>
+<body>
+
+<h2>-= Cyrene = Autres Missions =-</h2>
+
+<div class="top-bar">
+  <a href="index.html" class="back-button">⬅ Retour</a>
+
+  <div id="selectionCounter"></div>
+
+  <label class="filter-label">
+    <input type="checkbox" id="filterSelected">
+    Afficher seulement sélectionnés
+  </label>
+</div>
+
+<div data-timers-config="timers_cyrene_autres.json"
+     data-storage-key="timers_cyrene_autres">
+
+<table>
+  <thead>
+    <tr>
+	  <th>Sél.</th>
+      <th>Nom Mission</th>
+      <th>Actif / Compteur</th>
+      <th>WP à copier</th>
+    </tr>
+  </thead>
+    <tbody id="timersTable"></tbody>
+</table>
+
+<script src="timers_daily.js"></script>
+</body>
+</html>

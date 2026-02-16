@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cyr_am_1",
+    "name": "You're a Lumberjack now, Human! (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 138248, 77195, 115, Tanhok Lumberjack T'zin]"
+  },
+  {
+    "id": "cyr_am_2",
+    "name": "Lysterium Infused Zyn-tainer Blueprint (7j)",
+    "durationHours": 168,
+    "coords": "/wp [Planet Cyrene, 138028, 78719, 165, Satchel Maker Ro-bin’zyn]"
+  },
+  {
+    "id": "cyr_am_3",
+    "name": "Auraforging and You: Collecting sweat for ‘Axe’ (21h)",
+    "durationHours": 21,
+    "coords": "/wp [Planet Cyrene, 139007, 77904, 106, Auraforger]"
+  }
+  ]
