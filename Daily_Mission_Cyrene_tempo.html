@@ -9,6 +9,19 @@
 
 <h2>-= Tempo Mission =-</h2>
 
+<div class="top-bar">
+  <div id="selectionCounter"></div>
+
+  <label class="filter-label">
+    <input type="checkbox" id="filterSelected">
+    Afficher seulement sélectionnés
+  </label>
+</div>
+
+<div data-timers-config="timers_cyrene_tempo.json"
+     data-storage-key="timers_cyrene_tempo">
+
+
 <table>
   <thead>
     <tr>
@@ -18,10 +31,7 @@
       <th>WP à copier</th>
     </tr>
   </thead>
-  <tbody id="timersTable"
-         data-timers-config="timers_cyrene_tempo.json"
-         data-storage-key="timers_cyrene_tempo">
-  </tbody>
+  <tbody id="timersTable"></tbody>
 </table>
 
 <script src="timers_daily.js"></script>
