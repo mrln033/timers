@@ -98,6 +98,49 @@ table td:nth-child(4) {
 table {
   table-layout: fixed;
 }
+.page-title {
+  margin-bottom: 25px;
+  text-align: center;
+}
 
+.planet-section {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
 
+.planet-section h2 {
+  margin-top: 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
 
+.mission-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 10px 0 0 0;
+}
+
+.mission-list li {
+  margin: 8px 0;
+}
+
+.mission-link {
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #e3f2fd;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.mission-link:hover {
+  background-color: #bbdefb;
+}
+
+.disabled {
+  color: #999;
+  font-style: italic;
+}
