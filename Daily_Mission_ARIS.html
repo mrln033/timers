@@ -9,19 +9,31 @@
 
 <h2>-= Daily Mission = A.R.I.S.</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nom Mission</th>
-      <th>Actif / Compteur</th>
-      <th>WP à copier</th>
-    </tr>
-  </thead>
-  <tbody id="timersTable"
-         data-timers-config="timers_aris.json"
-         data-storage-key="timers_aris">
-  </tbody>
-</table>
+<div class="top-bar">
+  <div id="selectionCounter"></div>
+
+  <label class="filter-label">
+    <input type="checkbox" id="filterSelected">
+    Afficher seulement sélectionnés
+  </label>
+</div>
+
+<div data-timers-config="timers_aris.json"
+     data-storage-key="timers_aris">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sél.</th>
+        <th>Mission</th>
+        <th>Timer</th>
+        <th>Coordonnées</th>
+      </tr>
+    </thead>
+    <tbody id="timersTable"></tbody>
+  </table>
+
+</div>
 
 <script src="timers_daily.js"></script>
 

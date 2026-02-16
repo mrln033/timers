@@ -33,12 +33,6 @@ td.control-cell {
   gap: 4px;
 }
 
-.copy-input {
-  width: 100%;
-  padding: 4px;
-  font-size: 13px;
-}
-
 button {
   padding: 4px 8px;
   cursor: pointer;
@@ -63,3 +57,13 @@ button {
   margin-left: 6px;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filter-label {
+  font-size: 14px;
+}
