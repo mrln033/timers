@@ -10,14 +10,18 @@
 <h2>-= Daily Mission = A.R.I.S.</h2>
 
 <div class="top-bar">
-  <a href="index.html" class="back-button">⬅ Retour</a>
 
-  <div id="selectionCounter"></div>
+  <button class="back-button" onclick="window.location.href='index.html'">
+    ⬅ Retour
+  </button>
+
+  <div id="selectionCounter" class="selection-counter"></div>
 
   <label class="filter-label">
     <input type="checkbox" id="filterSelected">
     Afficher seulement sélectionnés
   </label>
+
 </div>
 
 <div data-timers-config="timers_aris.json"

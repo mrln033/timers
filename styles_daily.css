@@ -29,12 +29,60 @@ h2 {
   margin-top: 20px;
 }
 
+/* ===== TOP BAR ===== */
+
 .top-bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  min-height: 40px;
+}
+
+/* Centre parfait du compteur */
+.selection-counter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* ===== BACK BUTTON ===== */
+
+.back-button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #607d8b, #78909c);
+  color: white;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.back-button:active {
+  transform: translateY(0);
+}
+
+/* ===== FILTER ===== */
+
+.filter-label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .filter-label {
