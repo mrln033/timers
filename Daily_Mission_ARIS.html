@@ -8,6 +8,21 @@
 <body>
 
 <h2>-= Daily Mission = A.R.I.S.</h2>
+<div id="timersContainer"
+     data-timers-config="timers_aris.json"
+     data-storage-key="timers_aris">
+
+  <div class="controls">
+    <label>
+      <input type="checkbox" id="filterSelected">
+      Afficher seulement sélectionnés (inactifs)
+    </label>
+
+    <span id="selectionCounter">
+      Sélectionnés : 0 / 0
+    </span>
+  </div>
+
 
 <table>
   <thead>
@@ -18,10 +33,7 @@
       <th>WP à copier</th>
     </tr>
   </thead>
-  <tbody id="timersTable"
-         data-timers-config="timers_aris.json"
-         data-storage-key="timers_aris">
-  </tbody>
+  <tbody id="timersTable"</tbody>
 </table>
 
 <script src="timers_daily.js"></script>
