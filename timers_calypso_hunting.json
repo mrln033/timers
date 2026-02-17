@@ -5,12 +5,14 @@
     "durationHours": 21,
     "coords": "/wp [Calypso, 61774, 88019, 236, Daily Mission Terminal]"
   },
+  {
     "id": "cal_h_2",
     "name": "Daily Hunting Challenge 2 (21h - à la prise)",
     "durationHours": 21,
     "coords": "/wp [Calypso, 61774, 88019, 236, Daily Mission Terminal]"
   },
-    "id": "cal_h_2",
+  {
+    "id": "cal_h_3",
     "name": "Daily Hunting Challenge 3 (21h - à la prise)",
     "durationHours": 21,
     "coords": "/wp [Calypso, 61774, 88019, 236, Daily Mission Terminal]"
