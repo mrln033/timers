@@ -144,7 +144,7 @@ function addRow(timer) {
 
   /* =========================
      COLONNE 2 — Nom + Info + Badge
-  ========================= */
+    ========================= */
 
   const nameCell = document.createElement("td");
 
@@ -159,7 +159,7 @@ function addRow(timer) {
   if (timer.info) {
     const infoIcon = document.createElement("span");
     infoIcon.className = "info-icon";
-    infoIcon.textContent = " ℹ";
+    infoIcon.textContent = " 🛈";
 
     const tooltip = document.createElement("span");
     tooltip.className = "info-tooltip";
@@ -181,7 +181,7 @@ function addRow(timer) {
 
   /* =========================
      COLONNE 3 — Timer
-  ========================= */
+     ========================= */
 
   const controlCell = document.createElement("td");
   controlCell.className = "control-cell";
