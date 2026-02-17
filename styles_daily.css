@@ -320,3 +320,43 @@ button {
   50%  { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
+
+/* ============================= */
+/* ===== INFO TOOLTIP ========= */
+/* ============================= */
+
+.name-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2196f3;
+}
+
+.info-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.info-icon:hover .info-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

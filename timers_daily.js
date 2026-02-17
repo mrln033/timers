@@ -5,6 +5,7 @@
     const STORAGE_KEY = storageKey;
     let configTimers = [];
     let state = {};
+	let rowsMap = {};
 
     const tableBody = document.getElementById("timersTable");
     const selectionCounter = document.getElementById("selectionCounter");
@@ -50,46 +51,59 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    function renderTimers() {
+function renderTimers() {
 
-      tableBody.innerHTML = "";
+  tableBody.innerHTML = "";
+  rowsMap = {};
 
-      const showOnlySelected = filterCheckbox.checked;
+  const showOnlySelected = filterCheckbox.checked;
 
-      const activeTimers = configTimers
-        .filter(t => !!state[t.id].endTime)
-        .sort((a, b) =>
-          a.name.localeCompare(b.name, "fr", { sensitivity: "base" })
-        );
+  // Séparer actifs / inactifs
+  const activeTimers = [];
+  const inactiveTimers = [];
 
-      const inactiveTimers = configTimers
-        .filter(t => !state[t.id].endTime)
-        .sort((a, b) => {
-
-          if (state[a.id].selected !== state[b.id].selected) {
-            return state[b.id].selected - state[a.id].selected;
-          }
-
-          return a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
-        });
-
-      if (activeTimers.length > 0) {
-        addSectionHeader("Timers actifs");
-        activeTimers.forEach(timer => addRow(timer));
-      }
-
-      if (inactiveTimers.length > 0) {
-        addSectionHeader("Timers inactifs");
-
-        inactiveTimers.forEach(timer => {
-          if (showOnlySelected && !state[timer.id].selected) return;
-          addRow(timer);
-        });
-      }
-
-      updateSelectionCounter();
-      saveState();
+  configTimers.forEach(timer => {
+    if (state[timer.id].endTime) {
+      activeTimers.push(timer);
+    } else {
+      inactiveTimers.push(timer);
     }
+  });
+
+  // Tri alphabétique FR insensible casse
+  const sortByName = (a, b) =>
+    a.name.localeCompare(b.name, "fr", { sensitivity: "base" });
+
+  activeTimers.sort(sortByName);
+
+  inactiveTimers.sort((a, b) => {
+
+    // Sélectionnés en premier
+    if (state[a.id].selected !== state[b.id].selected) {
+      return state[b.id].selected - state[a.id].selected;
+    }
+
+    return sortByName(a, b);
+  });
+
+  // Affichage section actifs
+  if (activeTimers.length > 0) {
+    addSectionHeader("Timers actifs");
+    activeTimers.forEach(addRow);
+  }
+
+  // Affichage section inactifs
+  if (inactiveTimers.length > 0) {
+    addSectionHeader("Timers inactifs");
+
+    inactiveTimers.forEach(timer => {
+      if (showOnlySelected && !state[timer.id].selected) return;
+      addRow(timer);
+    });
+  }
+
+  updateSelectionCounter();
+}
 
     function addSectionHeader(text) {
       const row = document.createElement("tr");
@@ -101,154 +115,190 @@
       tableBody.appendChild(row);
     }
 
-    function addRow(timer) {
+function addRow(timer) {
 
-      const isActive = !!state[timer.id].endTime;
+  const s = state[timer.id];
+  const isActive = !!s.endTime;
 
-      const row = document.createElement("tr");
-      row.setAttribute("data-id", timer.id);
+  const row = document.createElement("tr");
+  row.dataset.id = timer.id;
 
-      if (isActive) row.classList.add("active-row");
+  if (isActive) row.classList.add("active-row");
 
-      // Sélection
-      const selectCell = document.createElement("td");
-      const selectBox = document.createElement("input");
-      selectBox.type = "checkbox";
-      selectBox.checked = state[timer.id].selected;
+  /* =========================
+     COLONNE 1 — Sélection
+  ========================= */
 
-      selectBox.addEventListener("change", () => {
-        state[timer.id].selected = selectBox.checked;
-        saveState();
-        renderTimers();
-      });
+  const selectCell = document.createElement("td");
+  const selectBox = document.createElement("input");
+  selectBox.type = "checkbox";
+  selectBox.checked = s.selected;
 
-      selectCell.appendChild(selectBox);
+  selectBox.addEventListener("change", () => {
+    s.selected = selectBox.checked;
+    saveState();
+    renderTimers();
+  });
 
-      // Nom
-      const nameCell = document.createElement("td");
-      nameCell.textContent = timer.name;
+  selectCell.appendChild(selectBox);
 
-      if (isActive) {
-        const badge = document.createElement("span");
-        badge.textContent = "Actif";
-        badge.className = "badge-active";
-        nameCell.appendChild(badge);
-      }
+  /* =========================
+     COLONNE 2 — Nom + Info + Badge
+  ========================= */
 
-      // Timer
-      const controlCell = document.createElement("td");
-      controlCell.className = "control-cell";
+  const nameCell = document.createElement("td");
 
-      const wrapper = document.createElement("div");
-      wrapper.className = "control-wrapper";
+  const nameWrapper = document.createElement("div");
+  nameWrapper.className = "name-wrapper";
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = isActive;
+  const nameText = document.createElement("span");
+  nameText.textContent = timer.name;
+  nameWrapper.appendChild(nameText);
 
-      const counterSpan = document.createElement("span");
-      counterSpan.className = "counter";
+  // Icône info
+  if (timer.info) {
+    const infoIcon = document.createElement("span");
+    infoIcon.className = "info-icon";
+    infoIcon.textContent = " ℹ";
 
-      checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-          state[timer.id].endTime =
-            Date.now() + timer.durationHours * 3600 * 1000;
-        } else {
-          state[timer.id].endTime = null;
-        }
-        saveState();
-        renderTimers();
-      });
+    const tooltip = document.createElement("span");
+    tooltip.className = "info-tooltip";
+    tooltip.textContent = timer.info;
 
-      wrapper.appendChild(checkbox);
-      wrapper.appendChild(counterSpan);
-      controlCell.appendChild(wrapper);
+    infoIcon.appendChild(tooltip);
+    nameWrapper.appendChild(infoIcon);
+  }
 
-      // Copier
-      const copyCell = document.createElement("td");
-      const copyButton = document.createElement("button");
-      copyButton.textContent = "Copier";
+  // Badge actif
+  if (isActive) {
+    const badge = document.createElement("span");
+    badge.textContent = "Actif";
+    badge.className = "badge-active";
+    nameWrapper.appendChild(badge);
+  }
 
-copyButton.addEventListener("click", async () => {
+  nameCell.appendChild(nameWrapper);
 
-  const text = timer.coords;
+  /* =========================
+     COLONNE 3 — Timer
+  ========================= */
 
-  // 1️⃣ Essai API moderne
-  if (navigator.clipboard && window.isSecureContext) {
+  const controlCell = document.createElement("td");
+  controlCell.className = "control-cell";
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "control-wrapper";
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = isActive;
+
+  const counterSpan = document.createElement("span");
+  counterSpan.className = "counter";
+
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      s.endTime = Date.now() + timer.durationHours * 3600 * 1000;
+    } else {
+      s.endTime = null;
+    }
+    saveState();
+    renderTimers();
+  });
+
+  wrapper.appendChild(checkbox);
+  wrapper.appendChild(counterSpan);
+  controlCell.appendChild(wrapper);
+
+  /* =========================
+     COLONNE 4 — Copier
+  ========================= */
+
+  const copyCell = document.createElement("td");
+  const copyButton = document.createElement("button");
+  copyButton.textContent = "Copier";
+
+  copyButton.addEventListener("click", async () => {
+
+    const text = timer.coords;
+
+    // API moderne
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        feedbackSuccess();
+        return;
+      } catch {}
+    }
+
+    // Fallback
     try {
-      await navigator.clipboard.writeText(text);
+      const tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
       feedbackSuccess();
       return;
     } catch {}
+
+    alert("Copie automatique bloquée. Texte sélectionné.");
+  });
+
+  function feedbackSuccess() {
+    copyButton.textContent = "Copié ✔";
+    setTimeout(() => {
+      copyButton.textContent = "Copier";
+    }, 1500);
   }
 
-  // 2️⃣ Fallback execCommand
-  try {
-    const tempInput = document.createElement("textarea");
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-    feedbackSuccess();
-    return;
-  } catch {}
+  copyCell.appendChild(copyButton);
 
-  // 3️⃣ Dernier fallback : sélection manuelle
-  alert("Copie automatique bloquée. Texte sélectionné.");
-  const tempInput = document.createElement("textarea");
-  tempInput.value = text;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-});
+  /* =========================
+     Assemblage
+  ========================= */
 
-function feedbackSuccess() {
-  copyButton.textContent = "Copié ✔";
-  setTimeout(() => {
-    copyButton.textContent = "Copier";
-  }, 1500);
+  row.appendChild(selectCell);
+  row.appendChild(nameCell);
+  row.appendChild(controlCell);
+  row.appendChild(copyCell);
+rowsMap[timer.id] = {
+  row: row,
+  counterSpan: counterSpan
+};
+
+  tableBody.appendChild(row);
 }
 
-      copyCell.appendChild(copyButton);
+function updateTimers() {
 
-      row.appendChild(selectCell);
-      row.appendChild(nameCell);
-      row.appendChild(controlCell);
-      row.appendChild(copyCell);
+  configTimers.forEach(timer => {
 
-      tableBody.appendChild(row);
+    const cached = rowsMap[timer.id];
+    if (!cached) return;
+
+    const counterSpan = cached.counterSpan;
+    const totalDuration = timer.durationHours * 3600 * 1000;
+    const s = state[timer.id];
+
+    if (!s.endTime) {
+      displayTime(counterSpan, totalDuration);
+      return;
     }
 
-    function updateTimers() {
+    const remaining = s.endTime - Date.now();
 
-      configTimers.forEach(timer => {
-
-        const row = tableBody.querySelector(`tr[data-id="${timer.id}"]`);
-        if (!row) return;
-
-        const counterSpan = row.querySelector(".counter");
-        if (!counterSpan) return;
-
-        const totalDuration = timer.durationHours * 3600 * 1000;
-        const s = state[timer.id];
-
-        if (!s.endTime) {
-          displayTime(counterSpan, totalDuration);
-          return;
-        }
-
-        const remaining = s.endTime - Date.now();
-
-        if (remaining <= 0) {
-          s.endTime = null;
-          saveState();
-          renderTimers();
-          return;
-        }
-
-        displayTime(counterSpan, remaining);
-      });
+    if (remaining <= 0) {
+      s.endTime = null;
+      saveState();
+      renderTimers();
+      return;
     }
+
+    displayTime(counterSpan, remaining);
+  });
+}
 
     function displayTime(element, ms) {
       const totalSeconds = Math.max(0, Math.floor(ms / 1000));
